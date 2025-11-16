@@ -1,0 +1,13 @@
+package com.example.BE_java_proj_Laptop_E_Commerce_web;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class HelloController {
+
+    @GetMapping("/")
+    public String index() {
+        return "Hello World form Spring Boot! With Royhung";
+    }
+}
