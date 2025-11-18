@@ -2,6 +2,7 @@ package com.example.BE_java_proj_Laptop_E_Commerce_web.controller;
 
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
@@ -19,8 +20,11 @@ public class UserController {
     }
 
     @RequestMapping("/")
-    public String getHomepage() {
+    public String getHomepage(Model model) {
         String test = this.userService.handleHello();
+        model.addAttribute("roy", test);
+        model.addAttribute("hung", "hahahaahhaha2026");
+
         return "hello";
     }
 
