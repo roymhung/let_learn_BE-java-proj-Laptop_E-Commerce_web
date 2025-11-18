@@ -3,9 +3,7 @@ package com.example.BE_java_proj_Laptop_E_Commerce_web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-// import org.springframework.web.bind.annotation.RestController;
-// import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
-// import org.springframework.web.bind.annotation.GetMapping;
+
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
 
@@ -23,8 +21,10 @@ public class UserController {
     @RequestMapping("/")
     public String getHomepage() {
         String test = this.userService.handleHello();
-        return "royhung.html";
+        return "hello";
     }
+
+
 }
 
 
