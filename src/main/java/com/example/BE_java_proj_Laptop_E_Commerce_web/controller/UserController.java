@@ -24,9 +24,15 @@ public class UserController {
         String test = this.userService.handleHello();
         model.addAttribute("roy", test);
         model.addAttribute("hung", "haha2026");
-
-
         return "hello";
+    }
+
+    @RequestMapping("/admin/user")
+    public String getUserpage(Model model) {
+        String test = this.userService.handleHello();
+        model.addAttribute("roy", test);
+        model.addAttribute("hung", "haha2026");
+        return "admin/user/create";
     }
 
 
