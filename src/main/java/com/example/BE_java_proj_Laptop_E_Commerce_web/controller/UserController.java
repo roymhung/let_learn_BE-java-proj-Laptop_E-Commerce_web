@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.UserRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
 
@@ -16,10 +17,12 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 public class UserController {
 
     // DI : dependency injection
-    private UserService userService;
+    private final UserService userService;
+    private final UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/")
@@ -40,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/admin/user/create1", method = RequestMethod.POST)
     public String createUserpage(Model model, @ModelAttribute("newUser") User royhung) {
         System.out.println(" Run here " + royhung);
-        System.out.println("CLASS: " + royhung.getClass().getName());
+        this.userRepository.save(royhung);
 
         return "hello";
     }
