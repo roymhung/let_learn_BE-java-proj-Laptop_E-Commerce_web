@@ -13,6 +13,8 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User hung);
 
+    List<User> findAll();
+
     List<User> findByEmail(String email);
 
     List<User> findByEmailAndAddress(String email, String address);
