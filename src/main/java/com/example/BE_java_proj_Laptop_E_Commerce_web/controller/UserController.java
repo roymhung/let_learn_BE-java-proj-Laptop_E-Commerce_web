@@ -33,11 +33,12 @@ public class UserController {
         return "hello";
     }
 
-    @RequestMapping("/admin/user") // GET
+    @RequestMapping("/admin/user") // Input: truyen vao la url
     public String getHomeUserpage(Model model) {
         List<User> users = this.userService.getAllUsers();
         model.addAttribute("users1", users);
-        return "admin/user/table-user";
+        return "admin/user/table-user";// Output: ViewResolver(file JSP) neu muon tra ve la URL thi
+                                       // phai co redirect(tuong tu nhu localhost{port}+URL)
     }
 
     @RequestMapping("/admin/user/create") // GET
@@ -46,10 +47,12 @@ public class UserController {
         return "admin/user/create";
     }
 
-    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/user/create", method = RequestMethod.POST) // Input: truyen vao
+                                                                               // la url
     public String createUserpage(Model model, @ModelAttribute("newUser") User royhung) {
         this.userService.handleSaveUser(royhung);
-        return "redirect:/admin/user";
+        return "redirect:/admin/user";// Output: ViewResolver(file JSP) neu muon tra ve la URL thi
+                                      // phai co redirect(tuong tu nhu localhost{port}+URL)
     }
 }
 
