@@ -23,9 +23,19 @@ public class UserService {
         return this.userRepository.findByEmail(email);
     }
 
+
     public User handleSaveUser(User user) {
         User mhung = this.userRepository.save(user);
         System.out.println(mhung);
         return mhung;
     }
+
+    // c1: public Optional<User> getUserById(Long id) {
+    // return this.userRepository.findById(id);
+    // }
+
+    public User getUserById(Long id) {
+        return this.userRepository.findById(id).orElse(null);
+    }
+
 }
