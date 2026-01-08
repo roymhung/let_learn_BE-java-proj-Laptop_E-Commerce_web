@@ -7,7 +7,7 @@
             <head>
                 <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>Document</title>
+                <title>Create-laptopWeb</title>
 
                 <!-- Bootstrap 5 CSS -->
                 <!-- Latest compiled and minified CSS -->
@@ -31,7 +31,7 @@
                             <h3>Create a user</h3>
                             <hr />
 
-                            <form:form method="POST" action="/admin/user/create1" modelAttribute="newUser">
+                            <form:form method="POST" action="/admin/user/create" modelAttribute="newUser">
 
                                 <div class="mb-3">
                                     <label class="form-label">Email:</label>
