@@ -30,10 +30,6 @@ public class UserService {
         return mhung;
     }
 
-    // c1: public Optional<User> getUserById(Long id) {
-    // return this.userRepository.findById(id);
-    // }
-
     public User getUserById(Long id) {
         return this.userRepository.findById(id).orElse(null);
     }
