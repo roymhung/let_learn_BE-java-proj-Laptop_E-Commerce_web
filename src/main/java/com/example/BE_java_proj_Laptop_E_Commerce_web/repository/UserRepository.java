@@ -13,6 +13,8 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 public interface UserRepository extends JpaRepository<User, Long> {
     User save(User hung);
 
+    void deleteById(long id);
+
     List<User> findAll();
 
     User findById(long id);
