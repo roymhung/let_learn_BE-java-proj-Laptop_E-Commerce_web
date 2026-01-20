@@ -47,43 +47,30 @@
                                     <li class="breadcrumb-item active">User</li>
                                 </ol>
 
-                                <!-- create user -->
+                                <!-- detail user -->
                                 <div class="mt-5">
                                     <div class="row">
-                                        <div class="col-md-6 col-12 mx-auto">
-                                            <h3>Create a user</h3>
+                                        <div class="col-12 mx-auto">
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                <h3>User Detail with id= ${id}</h3>
+                                                <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
+                                            </div>
+
                                             <hr />
 
-                                            <form:form method="POST" action="/admin/user/create"
-                                                modelAttribute="newUser">
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Email:</label>
-                                                    <form:input path="email" cssClass="form-control" />
+                                            <div class="card" style="width: 30rem;">
+                                                <div class="card-header">
+                                                    User Information
                                                 </div>
+                                                <ul class="list-group list-group-flush">
+                                                    <li class="list-group-item">ID: ${user.id}</li>
+                                                    <li class="list-group-item">Email: ${user.email}</li>
+                                                    <li class="list-group-item">Full Name: ${user.fullName}</li>
+                                                    <li class="list-group-item">Address: ${user.address}</li>
 
-                                                <div class="mb-3">
-                                                    <label class="form-label">Password:</label>
-                                                    <form:password path="password" cssClass="form-control" />
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Phone number:</label>
-                                                    <form:input path="phone" cssClass="form-control" />
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Full Name:</label>
-                                                    <form:input path="fullName" cssClass="form-control" />
-                                                </div>
-
-                                                <div class="mb-3">
-                                                    <label class="form-label">Address:</label>
-                                                    <form:input path="address" cssClass="form-control" />
-                                                </div>
-
-                                                <button class="btn btn-primary">Create</button>
-                                            </form:form>
+                                                </ul>
+                                            </div>
+                                            <a href="/admin/user" class="btn btn-success mt-3">Back</a>
 
                                         </div>
                                     </div>
