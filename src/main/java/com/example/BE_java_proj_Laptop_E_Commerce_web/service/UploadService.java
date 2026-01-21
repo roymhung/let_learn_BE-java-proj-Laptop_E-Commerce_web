@@ -31,6 +31,7 @@ public class UploadService {
 
             // Create the file on server
             finalName = System.currentTimeMillis() + "-" + file.getOriginalFilename();
+            finalName = finalName.replaceAll("[^a-zA-Z0-9.\\-]", "_");
             File serverFile = new File(dir.getAbsolutePath() + File.separator + finalName);
 
             BufferedOutputStream stream =
@@ -43,4 +44,17 @@ public class UploadService {
         }
         return finalName;
     }
+
+    public void handleDeleteUploadFile(String fileName, String targetFolder) {
+        if (fileName == null || fileName.isEmpty())
+            return;
+
+        String rootPath = this.servletContext.getRealPath("/resources/images");
+        File file = new File(rootPath + File.separator + targetFolder + File.separator + fileName);
+
+        if (file.exists()) {
+            file.delete();
+        }
+    }
+
 }

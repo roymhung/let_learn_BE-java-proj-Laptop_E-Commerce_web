@@ -64,6 +64,8 @@
                                                         <th>ID</th>
                                                         <th>Email</th>
                                                         <th>Full Name</th>
+                                                        <th>Role</th>
+                                                        <th>Avatar</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -74,6 +76,16 @@
                                                             <th>${user.id}</th>
                                                             <td>${user.email}</td>
                                                             <td>${user.fullName}</td>
+                                                            <td>${user.role.name}</td>
+                                                            <td>
+                                                                <c:if test="${not empty user.avatar}">
+                                                                    <img src="${pageContext.request.contextPath}/images/avatar/${user.avatar}"
+                                                                        width="60" height="60"
+                                                                        style="object-fit: cover; border-radius: 50%;" />
+                                                                </c:if>
+                                                            </td>
+
+
                                                             <td>
                                                                 <a href="/admin/user/${user.id}"
                                                                     class="btn btn-success">View</a>
