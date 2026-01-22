@@ -47,7 +47,7 @@
                                     <li class="breadcrumb-item active">User</li>
                                 </ol>
 
-                                <!-- show user -->
+                                <!-- Start show user -->
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
@@ -59,7 +59,7 @@
                                             <hr />
 
                                             <table class="table table-bordered table-hover">
-                                                <thead>
+                                                <thead class="table-dark">
                                                     <tr>
                                                         <th>ID</th>
                                                         <th>Email</th>
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!-- End show user -->
                             </div>
                         </main>
                         <!-- footer -->
