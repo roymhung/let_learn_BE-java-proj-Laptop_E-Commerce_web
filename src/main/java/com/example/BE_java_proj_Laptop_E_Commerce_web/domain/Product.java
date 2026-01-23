@@ -1,5 +1,6 @@
 package com.example.BE_java_proj_Laptop_E_Commerce_web.domain;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 
@@ -28,7 +30,9 @@ public class Product {
     // Lưu tên file, không bắt buộc
     private String image;
 
+    @NotNull
     @Size(min = 10, message = "Mô tả chi tiết không được để trống phải có ít nhất 10 ký tự")
+    @Column(columnDefinition = "MEDIUMTEXT")
     private String detailDesc;
 
 
