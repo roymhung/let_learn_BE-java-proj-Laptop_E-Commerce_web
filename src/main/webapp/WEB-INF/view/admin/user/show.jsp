@@ -65,7 +65,7 @@
                                                         <th>Full Name</th>
                                                         <th>Role</th>
                                                         <th>Avatar</th>
-                                                        <th>Action</th>
+                                                        <th width="450">Action</th>
                                                     </tr>
                                                 </thead>
 
