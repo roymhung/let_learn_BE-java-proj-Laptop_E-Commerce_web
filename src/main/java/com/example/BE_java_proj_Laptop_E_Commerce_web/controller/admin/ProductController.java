@@ -43,6 +43,7 @@ public class ProductController {
     public String getProductDetailPage(Model model, @PathVariable long id) {
         Product product = this.productService.getProductById(id);
         model.addAttribute("product", product);
+        model.addAttribute("id", id);
         return "admin/product/detail";
     }
 
