@@ -5,6 +5,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 
 @Entity
@@ -15,15 +18,31 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private long id;
+
+    @Size(min = 3, max = 255, message = "Tên sản phẩm không được để trống phải từ 3 đến 255 ký tự")
     private String name;
+
+    @DecimalMin(value = "0", inclusive = false, message = "Giá phải lớn hơn 0")
     private double price;
 
+    // Lưu tên file, không bắt buộc
     private String image;
+
+    @Size(min = 10, message = "Mô tả chi tiết không được để trống phải có ít nhất 10 ký tự")
     private String detailDesc;
 
+
+    @Size(min = 5, max = 255,
+            message = "Mô tả ngắn không được để trống phải có ít nhất từ 5 đến 255 ký tự")
     private String shortDesc;
+
+
+    @Min(value = 0, message = "Số lượng không được nhỏ hơn 0")
     private long quantity;
-    private long sold;
+
+    @Min(value = 0, message = "Số lượng đã bán không được nhỏ hơn 0")
+    private long sold = 0L;
+
     private String factory;
 
     private String target;

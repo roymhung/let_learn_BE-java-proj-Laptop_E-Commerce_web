@@ -29,11 +29,20 @@
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
                 <script>
                     $(document).ready(() => {
-                        const avatarFile = $("#avatarFile");
+                        const orgAvatar = "${newUser.avatar}";
+
+                        // Hiển thị avatar cũ khi load form
+                        if (orgAvatar) {
+                            const urlAvatar = "/images/avatar/" + orgAvatar;
+                            $("#avatarPreview").attr("src", urlAvatar);
+                            $("#avatarPreview").css({ display: "block" });
+                        }
+
+                        // Preview avatar mới khi chọn file
                         avatarFile.change(function (e) {
                             const imgURL = URL.createObjectURL(e.target.files[0]);
                             $("#avatarPreview").attr("src", imgURL);
-                            $("#avatarPreview").css({ "display": "block" });
+                            $("#avatarPreview").css({ display: "block" });
                         });
                     });
                 </script>
@@ -102,7 +111,7 @@
                                                     </form:select>
                                                 </div>
 
-                                                <div class="mb-3 col-12 col-md-6">
+                                                <div class="mb-3 col-12 ">
                                                     <label for="avatarFile" class="form-label">Avatar: </label>
                                                     <input class="form-control" type="file" id="avatarFile"
                                                         accept=".png, .jpg, .jpeg" name="hungFile" />

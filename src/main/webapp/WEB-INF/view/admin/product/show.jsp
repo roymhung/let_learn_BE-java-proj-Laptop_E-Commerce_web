@@ -59,10 +59,9 @@
                                                     <th>Image</th>
                                                     <th>Price</th>
                                                     <th>Quantity</th>
-                                                    <th>Sold</th>
                                                     <th>Factory</th>
                                                     <th>Target</th>
-                                                    <th width="180">Action</th>
+                                                    <th width="300">Action</th>
                                                 </tr>
                                             </thead>
 
@@ -71,17 +70,14 @@
                                                     <tr>
                                                         <td>${product.id}</td>
                                                         <td>${product.name}</td>
-
                                                         <td>
                                                             <c:if test="${not empty product.image}">
-                                                                <img src="${pageContext.request.contextPath}/uploads/${product.image}"
+                                                                <img src="${pageContext.request.contextPath}/images/product/${product.image}"
                                                                     width="70" style="object-fit: cover;" />
                                                             </c:if>
                                                         </td>
-
                                                         <td>${product.price}</td>
                                                         <td>${product.quantity}</td>
-                                                        <td>${product.sold}</td>
                                                         <td>${product.factory}</td>
                                                         <td>${product.target}</td>
 
@@ -97,8 +93,7 @@
                                                             </a>
 
                                                             <a href="/admin/product/delete/${product.id}"
-                                                                class="btn btn-danger btn-sm"
-                                                                onclick="return confirm('Are you sure?')">
+                                                                class="btn btn-danger btn-sm">
                                                                 Delete
                                                             </a>
                                                         </td>

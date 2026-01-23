@@ -1,7 +1,6 @@
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
         <%@taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-
             <!DOCTYPE html>
             <html lang="en">
 
@@ -30,6 +29,7 @@
             </head>
 
             <body class="sb-nav-fixed">
+
                 <jsp:include page="../layout/header.jsp" />
 
                 <div id="layoutSidenav">
@@ -39,51 +39,75 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Order</h1>
+                                <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">
                                             Dashboard
                                         </a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                 </ol>
 
-                                <!-- detail user -->
+                                <!-- PRODUCT DETAIL -->
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
                                             <div class="d-flex justify-content-between align-items-center">
-                                                <h3>User Detail with id= ${id}</h3>
-                                                <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
+                                                <h3>Product Detail (ID = ${product.id})</h3>
+                                                <a href="/admin/product/create" class="btn btn-primary">Create a
+                                                    Product</a>
                                             </div>
 
                                             <hr />
 
                                             <div class="card" style="width: 30rem;">
                                                 <div class="card-header">
-                                                    User Information
+                                                    Product Information
                                                 </div>
                                                 <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><strong>ID:</strong> ${user.id}</li>
-                                                    <li class="list-group-item"><strong>Email:</strong> ${user.email}
-                                                    </li>
-                                                    <li class="list-group-item"><strong>Full Name:</strong>
-                                                        ${user.fullName}</li>
-                                                    <li class="list-group-item"><strong>Address:</strong>
-                                                        ${user.address}</li>
-                                                    <li class="list-group-item"><strong>Role:</strong> ${user.role.name}
+                                                    <li class="list-group-item">
+                                                        <strong>Name:</strong> ${product.name}
                                                     </li>
 
-                                                    <li class="list-group-item"><strong>Avatar:</strong>
-                                                        <c:if test="${not empty user.avatar}">
-                                                            <img src="${pageContext.request.contextPath}/images/avatar/${user.avatar}"
-                                                                width="60" height="60"
-                                                                style="object-fit: cover; border-radius: 50%;" />
+                                                    <li class="list-group-item">
+                                                        <strong>Price:</strong> ${product.price}
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Quantity:</strong> ${product.quantity}
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Sold:</strong> ${product.sold}
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Factory:</strong> ${product.factory}
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Target:</strong> ${product.target}
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Short Description:</strong> ${product.shortDesc}
+
+                                                    </li>
+
+                                                    <li class="list-group-item">
+                                                        <strong>Detail Description:</strong> ${product.detailDesc}
+
+                                                    </li>
+
+                                                    <li class="list-group-item"> <strong>Image:</strong>
+                                                        <c:if test="${not empty product.image}">
+                                                            <img src="${pageContext.request.contextPath}/images/product/${product.image}"
+                                                                width="150" height="150" />
                                                         </c:if>
                                                     </li>
 
                                                 </ul>
                                             </div>
-                                            <a href="/admin/user" class="btn btn-success mt-3">Back</a>
+                                            <a href="/admin/product" class="btn btn-success mt-3">Back</a>
 
                                         </div>
                                     </div>

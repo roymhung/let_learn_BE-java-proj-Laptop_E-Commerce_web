@@ -39,51 +39,35 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-                                <h1 class="mt-4">Manage Order</h1>
+                                <h1 class="mt-4">Manage Product</h1>
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item"><a href="/admin">
                                             Dashboard
                                         </a></li>
-                                    <li class="breadcrumb-item active">User</li>
+                                    <li class="breadcrumb-item active">Product</li>
                                 </ol>
 
-                                <!-- detail user -->
+                                <!-- delete user -->
                                 <div class="mt-5">
                                     <div class="row">
-                                        <div class="col-12 mx-auto">
-                                            <div class="d-flex justify-content-between align-items-center">
-                                                <h3>User Detail with id= ${id}</h3>
-                                                <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
-                                            </div>
-
+                                        <div class="col-md-6 col-12 mx-auto">
+                                            <h3>Delete a product with id = ${id}</h3>
                                             <hr />
 
-                                            <div class="card" style="width: 30rem;">
-                                                <div class="card-header">
-                                                    User Information
-                                                </div>
-                                                <ul class="list-group list-group-flush">
-                                                    <li class="list-group-item"><strong>ID:</strong> ${user.id}</li>
-                                                    <li class="list-group-item"><strong>Email:</strong> ${user.email}
-                                                    </li>
-                                                    <li class="list-group-item"><strong>Full Name:</strong>
-                                                        ${user.fullName}</li>
-                                                    <li class="list-group-item"><strong>Address:</strong>
-                                                        ${user.address}</li>
-                                                    <li class="list-group-item"><strong>Role:</strong> ${user.role.name}
-                                                    </li>
-
-                                                    <li class="list-group-item"><strong>Avatar:</strong>
-                                                        <c:if test="${not empty user.avatar}">
-                                                            <img src="${pageContext.request.contextPath}/images/avatar/${user.avatar}"
-                                                                width="60" height="60"
-                                                                style="object-fit: cover; border-radius: 50%;" />
-                                                        </c:if>
-                                                    </li>
-
-                                                </ul>
+                                            <div class="alert alert-danger">
+                                                Are you sure to delete this product ?
                                             </div>
-                                            <a href="/admin/user" class="btn btn-success mt-3">Back</a>
+                                            <form:form method="post" action="/admin/product/delete"
+                                                modelAttribute="newProduct">
+
+                                                <!-- ID -->
+                                                <div class="mb-3" style="display: none;">
+                                                    <label class="form-label">ID:</label>
+                                                    <form:input value="${id}" path="id" cssClass="form-control" />
+                                                </div>
+
+                                                <button class="btn btn-danger">Confirm</button>
+                                            </form:form>
 
                                         </div>
                                     </div>

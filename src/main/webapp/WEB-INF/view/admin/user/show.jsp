@@ -55,10 +55,9 @@
                                                 <h3>Table users</h3>
                                                 <a href="/admin/user/create" class="btn btn-primary">Create a user</a>
                                             </div>
-
                                             <hr />
 
-                                            <table class="table table-bordered table-hover">
+                                            <table class="table table-bordered table-hover align-middle">
                                                 <thead class="table-dark">
                                                     <tr>
                                                         <th>ID</th>
