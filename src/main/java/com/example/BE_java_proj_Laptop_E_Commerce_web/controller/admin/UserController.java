@@ -78,7 +78,6 @@ public class UserController {
             System.out.println(error.getField() + " - " + error.getDefaultMessage());
         }
 
-        // validate
         if (newUserBindingResult.hasErrors()) {
             return "admin/user/create";
         }
