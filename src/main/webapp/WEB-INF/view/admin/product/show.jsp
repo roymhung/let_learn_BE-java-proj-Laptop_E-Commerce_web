@@ -72,7 +72,10 @@
                                                                         width="70" style="object-fit: cover;" />
                                                                 </c:if>
                                                             </td>
-                                                            <td>${product.price}</td>
+                                                            <td>
+                                                                <fmt:formatNumber value="${product.price}" type="number"
+                                                                    groupingUsed="true" /> vnd
+                                                            </td>
                                                             <td>${product.quantity}</td>
                                                             <td>${product.factory}</td>
                                                             <td>${product.target}</td>
