@@ -58,7 +58,7 @@
 
                                             <hr />
 
-                                            <div class="card" style="width: 30rem;">
+                                            <div class="card" style="width: 72rem;">
                                                 <div class="card-header">
                                                     User Information
                                                 </div>
