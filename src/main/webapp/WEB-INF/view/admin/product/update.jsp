@@ -43,6 +43,24 @@
                         });
                     });
                 </script>
+                <!-- Đoạn script cho Nhập giá tiền -->
+                <script>
+                    function formatCurrency(input) {
+                        // Lấy số, bỏ hết ký tự không phải số
+                        let value = input.value.replace(/\D/g, '');
+                        if (value === '') {
+                            document.getElementById('price').value = '';
+                            input.value = '';
+                            return;
+                        }
+
+                        // Gán giá trị thật cho hidden input
+                        document.getElementById('price').value = value;
+
+                        // Format hiển thị: 1.200.000
+                        input.value = new Intl.NumberFormat('vi-VN').format(value);
+                    }
+                </script>
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
@@ -113,12 +131,19 @@
                                                     ${errorName}
                                                 </div>
 
-                                                <!-- Price -->
                                                 <div class="mb-3 col-12 col-md-6">
-                                                    <label class="form-label">Price:</label>
-                                                    <form:input path="price" type="number" step="0.01"
-                                                        cssClass="form-control ${not empty errorPrice ? 'is-invalid' : ''}" />
-                                                    ${errorPrice}
+                                                    <label class="form-label">Price</label>
+
+                                                    <div class="input-group">
+                                                        <input type="text" id="priceDisplay"
+                                                            class="form-control ${not empty errorPrice ? 'is-invalid' : ''}"
+                                                            placeholder="Ví dụ: 1.200.000 VNĐ"
+                                                            oninput="formatCurrency(this)" />
+                                                        ${errorPrice}
+                                                    </div>
+
+                                                    <!-- input ẩn để submit lên server -->
+                                                    <form:hidden path="price" id="price" />
                                                 </div>
 
                                                 <!-- Detail Desc -->

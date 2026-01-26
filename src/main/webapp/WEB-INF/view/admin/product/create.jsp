@@ -27,7 +27,6 @@
 
                 <link href="/css/styles.css" rel="stylesheet" />
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-                <!-- Đoạn script cho avatar -->
                 <script>
                     $(document).ready(() => {
                         const avatarFile = $("#avatarFile");
@@ -56,6 +55,7 @@
                         input.value = new Intl.NumberFormat('vi-VN').format(value);
                     }
                 </script>
+
                 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
             </head>
 
