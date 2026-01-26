@@ -18,7 +18,6 @@ import jakarta.validation.constraints.Size;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private long id;
 
     @Size(min = 3, max = 255, message = "Tên sản phẩm không được để trống phải từ 3 đến 255 ký tự")

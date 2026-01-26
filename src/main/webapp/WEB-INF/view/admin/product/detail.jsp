@@ -56,7 +56,6 @@
                                                 <a href="/admin/product/create" class="btn btn-primary">Create a
                                                     Product</a>
                                             </div>
-
                                             <hr />
 
                                             <div class="card" style="width: 30rem;">

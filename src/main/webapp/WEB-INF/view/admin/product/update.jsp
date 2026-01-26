@@ -73,7 +73,7 @@
 
                                             <form:form method="POST" action="/admin/product/update"
                                                 modelAttribute="newProduct" class="row" enctype="multipart/form-data">
-
+                                                <!-- ERROR VARS -->
                                                 <c:set var="errorName">
                                                     <form:errors path="name" cssClass="invalid-feedback d-block" />
                                                 </c:set>
@@ -129,7 +129,6 @@
                                                     ${errorDetailDesc}
                                                 </div>
 
-
                                                 <!-- Short Desc -->
                                                 <div class="mb-3 col-12">
                                                     <label class="form-label">Short Description:</label>
@@ -137,7 +136,6 @@
                                                         cssClass="form-control ${not empty errorShortDesc ? 'is-invalid' : ''}" />
                                                     ${errorShortDesc}
                                                 </div>
-
 
                                                 <!-- Quantity -->
                                                 <div class="mb-3 col-12 col-md-6">
@@ -154,9 +152,6 @@
                                                         cssClass="form-control ${not empty errorSold ? 'is-invalid' : ''}" />
                                                     ${errorSold}
                                                 </div>
-
-
-
 
                                                 <!-- Factory -->
                                                 <div class="mb-3 col-md-6">
@@ -195,7 +190,6 @@
                                                 <!-- Current Image -->
                                                 <div class="col-12 mb-3">
                                                     <label class="form-label">Current Image</label><br />
-
                                                     <c:if test="${not empty newProduct.image}">
                                                         <img id="avatarPreview" src="/uploads/product/${product.image}"
                                                             style="max-height: 250px;" />

@@ -28,9 +28,7 @@
                     <div id="layoutSidenav_content">
                         <main>
                             <div class="container-fluid px-4">
-
                                 <h1 class="mt-4">Manage Products</h1>
-
                                 <ol class="breadcrumb mb-4">
                                     <li class="breadcrumb-item">
                                         <a href="/admin">Dashboard</a>
@@ -41,14 +39,12 @@
                                 <div class="mt-5">
                                     <div class="row">
                                         <div class="col-12 mx-auto">
-
                                             <div class="d-flex justify-content-between align-items-center">
                                                 <h3>Product Table</h3>
                                                 <a href="/admin/product/create" class="btn btn-primary">
                                                     Create Product
                                                 </a>
                                             </div>
-
                                             <hr />
 
                                             <table class="table table-bordered table-hover align-middle">
