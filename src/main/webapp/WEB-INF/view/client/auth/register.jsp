@@ -30,14 +30,14 @@
 
                             <!-- LEFT -->
                             <div class="col-md-5 auth-left d-flex flex-column justify-content-center">
-                                <h2>Welcome 🌱</h2>
+                                <h2>Chào mừng 🌱</h2>
                                 <p class="mt-3">
-                                    Create your account to start managing your system easily and efficiently.
+                                    Tạo tài khoản để bắt đầu quản lý hệ thống của bạn một cách dễ dàng và hiệu quả.
                                 </p>
                                 <p class="mt-4 small">
-                                    Already have an account?<br>
-                                    <a href="login.html" class="text-white text-decoration-underline">
-                                        Login here
+                                    Bạn đã có tài khoản rồi?<br>
+                                    <a href="/login" class="text-white text-decoration-underline">
+                                        Đăng nhập tại đây
                                     </a>
                                 </p>
                             </div>
@@ -45,7 +45,7 @@
                             <!-- RIGHT -->
                             <div class="col-md-7 auth-right">
                                 <div class="card-headr">
-                                    <h3 class="mb-4 text-center">Create Account</h3>
+                                    <h3 class="mb-4 text-center">Tạo tài khoản</h3>
                                 </div>
                                 <div class="card-body">
                                     <form:form method="post" action="/register" modelAttribute="registerUser">
@@ -97,13 +97,13 @@
                                         <div class="d-grid mb-3">
                                             <button class="btn btn-primary">
                                                 <i class="fa-solid fa-user-plus me-2"></i>
-                                                Create Account
+                                                Tạo tài khoản
                                             </button>
                                         </div>
 
                                         <div class="text-center auth-footer text-muted">
-                                            By registering, you agree to our
-                                            <a href="#">Terms</a> & <a href="#">Privacy Policy</a>
+                                            Bằng việc đăng ký, bạn đồng ý với
+                                            <a href="#">Điều khoản sử dụng</a> & <a href="#">Chính sách bảo mật</a>
                                         </div>
                                     </form:form>
                                 </div>
