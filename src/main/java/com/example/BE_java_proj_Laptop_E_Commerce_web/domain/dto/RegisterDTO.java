@@ -1,5 +1,8 @@
 package com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto;
 
+import com.example.BE_java_proj_Laptop_E_Commerce_web.service.validator.RegisterChecked;
+
+@RegisterChecked
 public class RegisterDTO {
     private String firstName;
     private String lastName;
