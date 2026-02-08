@@ -36,11 +36,11 @@ public class User {
     private String fullName;
 
 
-    @NotNull
+    // @NotNull
     @Size(min = 5, message = "Địa chỉ phải có tối thiểu 5 ký tự")
     private String address;
 
-    @NotNull
+    // @NotNull
     @Pattern(regexp = "^(0[0-9]{9,10})$", message = "Số điện thoại không hợp lệ")
     private String phone;
 

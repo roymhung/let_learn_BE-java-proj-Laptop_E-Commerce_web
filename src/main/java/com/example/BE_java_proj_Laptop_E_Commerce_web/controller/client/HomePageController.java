@@ -2,6 +2,7 @@ package com.example.BE_java_proj_Laptop_E_Commerce_web.controller.client;
 
 import java.util.List;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,16 +10,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
 @Controller
 public class HomePageController {
 
     private final ProductService productService;
+    private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
 
-    public HomePageController(ProductService productService) {
+
+    public HomePageController(ProductService productService, UserService userService,
+            PasswordEncoder passwordEncoder) {
         this.productService = productService;
+        this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @GetMapping("/")
@@ -36,9 +45,18 @@ public class HomePageController {
 
     @PostMapping("/register")
     public String handleRegister(@ModelAttribute("registerUser") RegisterDTO registerDTO) {
-        // registerService.save(r);
-        return "client/auth/register";
+        User user = this.userService.registerDTOtoUser(registerDTO);
+
+        String hashPassword = this.passwordEncoder.encode(user.getPassword());
+        user.setPassword(hashPassword);
+        user.setRole(this.userService.getRoleByName("USER"));
+        this.userService.handleSaveUser(user);
+        return "redirect:/login";
     }
 
+    @GetMapping("/login")
+    public String getLoginPage(Model model) {
 
+        return "client/auth/login";
+    }
 }
