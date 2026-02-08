@@ -1,11 +1,21 @@
 package com.example.BE_java_proj_Laptop_E_Commerce_web.service.validator;
 
+import org.springframework.stereotype.Service;
+
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+@Service
 public class RegisterValidator implements ConstraintValidator<RegisterChecked, RegisterDTO> {
+
+    private final UserService userService;
+
+    public RegisterValidator(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     public boolean isValid(RegisterDTO user, ConstraintValidatorContext context) {
@@ -20,7 +30,13 @@ public class RegisterValidator implements ConstraintValidator<RegisterChecked, R
         }
 
         // Additional validations can be added here
-
+        // check email
+        if (this.userService.checkEmailExit(user.getEmail())) {
+            context.buildConstraintViolationWithTemplate("Email đã tồn tại")
+                    .addPropertyNode("email").addConstraintViolation()
+                    .disableDefaultConstraintViolation();
+            valid = false;
+        }
         return valid;
     }
 }

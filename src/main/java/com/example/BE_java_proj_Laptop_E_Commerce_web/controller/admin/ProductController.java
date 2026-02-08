@@ -58,6 +58,13 @@ public class ProductController {
     public String handleCreateProduct(Model model, @ModelAttribute("newProduct") @Valid Product pr,
             BindingResult newProductBindingResult, @RequestParam("hungFile") MultipartFile file) {
 
+        // validate ở BE
+        // List<FieldError> errors = newProductBindingResult.getFieldErrors();
+        // for (FieldError error : errors) {
+        // System.out.println(">>>>" + error.getField() + "---" + error.getDefaultMessage());
+        // }
+
+        // validate trả về FE(view)
         if (newProductBindingResult.hasErrors()) {
             return "admin/product/create";
         }
