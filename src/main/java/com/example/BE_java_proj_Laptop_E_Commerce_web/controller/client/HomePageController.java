@@ -5,8 +5,11 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
 
 @Controller
@@ -27,7 +30,15 @@ public class HomePageController {
 
     @GetMapping("/register")
     public String getRegisterPage(Model model) {
+        model.addAttribute("registerUser", new RegisterDTO());
         return "client/auth/register";
     }
+
+    @PostMapping("/register")
+    public String handleRegister(@ModelAttribute("registerUser") RegisterDTO registerDTO) {
+        // registerService.save(r);
+        return "client/auth/register";
+    }
+
 
 }

@@ -48,31 +48,36 @@
                                     <h3 class="mb-4 text-center">Create Account</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form:form method="post" action="/register">
+                                    <form:form method="post" action="/register" modelAttribute="registerUser">
                                         <div class="row mb-3">
                                             <div class="col-md-6 mb-3 mb-md-0">
                                                 <label class="form-label">First name</label>
-                                                <input type="text" class="form-control" placeholder="John">
+                                                <form:input type="text" class="form-control" placeholder="John"
+                                                    path="firstName" />
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Last name</label>
-                                                <input type="text" class="form-control" placeholder="Doe">
+                                                <form:input type="text" class="form-control" placeholder="Doe"
+                                                    path="lastName" />
                                             </div>
                                         </div>
 
                                         <div class="mb-3">
                                             <label class="form-label">Email address</label>
-                                            <input type="email" class="form-control" placeholder="name@example.com">
+                                            <form:input type="email" class="form-control" placeholder="name@example.com"
+                                                path="email" />
                                         </div>
 
                                         <div class="row mb-4">
                                             <div class="col-md-6 mb-3 mb-md-0">
                                                 <label class="form-label">Password</label>
-                                                <input type="password" class="form-control" placeholder="••••••••">
+                                                <form:input type="password" class="form-control" placeholder="••••••••"
+                                                    path="password" />
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Confirm password</label>
-                                                <input type="password" class="form-control" placeholder="••••••••">
+                                                <form:input type="password" class="form-control" placeholder="••••••••"
+                                                    path="confirmPassword" />
                                             </div>
                                         </div>
 
