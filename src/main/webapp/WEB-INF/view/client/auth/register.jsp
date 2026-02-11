@@ -51,18 +51,29 @@
                                     <form:form method="post" action="/register" modelAttribute="registerUser">
                                         <!-- ERROR VARS -->
                                         <c:set var="errorPassword">
+                                            <form:errors path="password" cssClass="invalid-feedback d-block" />
+                                        </c:set>
+
+                                        <c:set var="errorConfirmPassword">
                                             <form:errors path="confirmPassword" cssClass="invalid-feedback d-block" />
                                         </c:set>
+
 
                                         <c:set var="errorEmail">
                                             <form:errors path="email" cssClass="invalid-feedback d-block" />
                                         </c:set>
 
+                                        <c:set var="errorFirstName">
+                                            <form:errors path="firstName" cssClass="invalid-feedback d-block" />
+                                        </c:set>
+
                                         <div class="row mb-3">
                                             <div class="col-md-6 mb-3 mb-md-0">
                                                 <label class="form-label">First name</label>
-                                                <form:input type="text" class="form-control" placeholder="John"
-                                                    path="firstName" />
+                                                <form:input type="text"
+                                                    cssClass="form-control ${not empty errorFirstName ? 'is-invalid' : ''}"
+                                                    placeholder="John" path="firstName" />
+                                                ${errorFirstName}
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Last name</label>
@@ -86,6 +97,7 @@
                                                     cssClass="form-control ${not empty errorPassword ? 'is-invalid' : ''}"
                                                     placeholder="••••••••" path="password" />
                                                 ${errorPassword}
+                                                ${errorConfirmPassword}
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Confirm password</label>
