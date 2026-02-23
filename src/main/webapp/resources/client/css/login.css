@@ -41,6 +41,25 @@ body {
   padding: 4.5rem;
 }
 
+/* === INPUT MODERN === */
+.auth-right .form-control {
+  height: 44px;
+  border-radius: 10px;
+}
+
+/* === BUTTON MODERN === */
+.auth-right .btn {
+  height: 46px;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+/* === ALERT LOGIN === */
+.auth-right .alert {
+  border-radius: 10px;
+  font-size: 14px;
+}
+
 .form-label {
   font-weight: 500;
   margin-bottom: 0.25rem;
