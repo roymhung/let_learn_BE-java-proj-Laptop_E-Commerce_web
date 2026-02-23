@@ -53,7 +53,7 @@ public class SecurityConfiguration {
                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
 
                 .requestMatchers("/", "/login", "/product/**", "/client/**", "/css/**", "/js/**",
-                        "/images/**")
+                        "/images/**", "/session-expired")
                 .permitAll()
 
                 .requestMatchers("/admin/**").hasRole("ADMIN")
@@ -63,7 +63,7 @@ public class SecurityConfiguration {
                 .sessionManagement((sessionManagement) -> sessionManagement
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                         .invalidSessionUrl("/logout?expired").maximumSessions(1)
-                        .maxSessionsPreventsLogin(false))
+                        .maxSessionsPreventsLogin(false).expiredUrl("/session-expired"))
 
                 .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
 

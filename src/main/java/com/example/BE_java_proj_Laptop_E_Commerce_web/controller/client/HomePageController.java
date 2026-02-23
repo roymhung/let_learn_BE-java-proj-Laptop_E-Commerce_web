@@ -76,4 +76,9 @@ public class HomePageController {
         return "client/auth/access-deny";
     }
 
+    @GetMapping("/session-expired")
+    public String sessionExpired() {
+
+        return "client/auth/session-expired";
+    }
 }
