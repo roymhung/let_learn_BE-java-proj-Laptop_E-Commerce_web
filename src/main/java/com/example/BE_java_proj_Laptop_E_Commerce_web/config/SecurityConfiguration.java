@@ -5,12 +5,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
-
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.CustomUserDetailsService;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
@@ -45,8 +45,10 @@ public class SecurityConfiguration {
         return new CustomSuccessHandler();
     }
 
+
     @Bean
-    SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain filterChain(HttpSecurity http, UserDetailsService userDetailsService)
+            throws Exception {
         http.authorizeHttpRequests(authorize -> authorize
                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
 
@@ -57,6 +59,20 @@ public class SecurityConfiguration {
                 .requestMatchers("/admin/**").hasRole("ADMIN")
 
                 .anyRequest().authenticated())
+
+                .sessionManagement((sessionManagement) -> sessionManagement
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .invalidSessionUrl("/logout?expired").maximumSessions(1)
+                        .maxSessionsPreventsLogin(false))
+
+                .logout(logout -> logout.deleteCookies("JSESSIONID").invalidateHttpSession(true))
+
+                .rememberMe(remember -> remember.key("uniqueAndSecretKey")
+                        .userDetailsService(userDetailsService) // thieu la loi
+                        .rememberMeParameter("remember-me")
+                        .rememberMeCookieName("remember-me-cookie")
+                        .tokenValiditySeconds(30 * 24 * 60 * 60) // 7 ngày
+                        .alwaysRemember(true))
 
                 .formLogin(formLogin -> formLogin.loginPage("/login").failureUrl("/login?error")
                         .successHandler(customSuccessHandler()).permitAll())
