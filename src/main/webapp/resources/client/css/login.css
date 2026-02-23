@@ -60,6 +60,24 @@ body {
   font-size: 14px;
 }
 
+.auth-right .alert {
+  border-radius: 12px;
+  font-size: 14px;
+  padding: 10px 14px;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.alert-danger {
+  background: #fff2f2;
+  color: #dc2626;
+}
+
+.alert-success {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
 .form-label {
   font-weight: 500;
   margin-bottom: 0.25rem;

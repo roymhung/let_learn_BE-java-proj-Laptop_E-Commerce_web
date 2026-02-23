@@ -57,6 +57,14 @@
                                             </div>
                                         </c:if>
 
+                                        <!-- LOGOUT SUCCESS -->
+                                        <c:if test="${param.logout != null}">
+                                            <div class="alert alert-success d-flex align-items-center py-2 px-3 mb-3">
+                                                <i class="fa-solid fa-circle-check me-2"></i>
+                                                Đăng xuất thành công
+                                            </div>
+                                        </c:if>
+
                                         <div class="mb-3">
                                             <label class="form-label">Email address</label>
                                             <input type="email" class="form-control" placeholder="name@example.com"
