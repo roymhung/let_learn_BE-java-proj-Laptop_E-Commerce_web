@@ -15,7 +15,8 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
-
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
 @Controller
@@ -37,6 +38,7 @@ public class HomePageController {
     public String getHomePage(Model model) {
         List<Product> products = this.productService.fetchProducts();
         model.addAttribute("products", products);
+
         return "client/homepage/show";
     }
 
