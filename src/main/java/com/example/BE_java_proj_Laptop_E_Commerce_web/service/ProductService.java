@@ -5,7 +5,10 @@ import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.CartDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartDeltailRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.ProductRepository;
@@ -15,13 +18,16 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CartRepository cartRepository;
-    private final CartDeltailRepository CartDeltailRepository;
+    private final CartDeltailRepository cartDeltailRepository;
+    private final UserService userService;
 
-    public ProductService(CartDeltailRepository CartDeltailRepository,
-            CartRepository cartRepository, ProductRepository productRepository) {
-        this.CartDeltailRepository = CartDeltailRepository;
+    public ProductService(CartDeltailRepository cartDeltailRepository,
+            CartRepository cartRepository, ProductRepository productRepository,
+            UserService userService) {
+        this.cartDeltailRepository = cartDeltailRepository;
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
+        this.userService = userService;
     }
 
     // ===================== CREATE & UPDATE =====================
@@ -49,9 +55,35 @@ public class ProductService {
         return cartRepository;
     }
 
-    public void handleAddProductToCart() {
-        // check-user đã có Cart chưa ? nếu chưa tạo mới
+    public void handleAddProductToCart(String email, long productId) {
+        User user = this.userService.getUserByEmail(email);
+        if (user != null) {
+            // check user đã có Cart chưa ? nếu chưa -> tạo mới
+            Cart cart = this.cartRepository.findByUser(user);
+            if (cart == null) {
+                // tạo mới cart
+                Cart otherCart = new Cart();
+                otherCart.setUser(user);
+                otherCart.setSum(1);
 
-        // lưu cart_detail
+                this.cartRepository.save(otherCart);
+            }
+
+            // lưu cart_detail
+            // tim product by id
+            Optional<Product> producOptional = this.productRepository.findById(productId);
+            if (producOptional.isPresent()) {
+                Product realProduct = producOptional.get();
+
+                CartDetail cd = new CartDetail();
+                cd.setCart(cart);
+                cd.setProduct(realProduct);
+                cd.setPrice(realProduct.getPrice());
+                cd.setQuantity(1);
+
+                this.cartDeltailRepository.save(cd);
+            }
+
+        }
     }
 }

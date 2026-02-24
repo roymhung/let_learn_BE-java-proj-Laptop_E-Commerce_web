@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ItemController {
@@ -27,7 +29,12 @@ public class ItemController {
     }
 
     @PostMapping("/add-product-to-cart/{id}")
-    public String addProductToCart(@PathVariable long id) {
+    public String addProductToCart(@PathVariable long id, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+
+        long productId = id;
+        String email = (String) session.getAttribute("email");
+        this.productService.handleAddProductToCart(email, productId);
         return "redirect:/";
     }
 
