@@ -6,14 +6,21 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartDeltailRepository;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.ProductRepository;
 
 @Service
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final CartRepository cartRepository;
+    private final CartDeltailRepository CartDeltailRepository;
 
-    public ProductService(ProductRepository productRepository) {
+    public ProductService(CartDeltailRepository CartDeltailRepository,
+            CartRepository cartRepository, ProductRepository productRepository) {
+        this.CartDeltailRepository = CartDeltailRepository;
+        this.cartRepository = cartRepository;
         this.productRepository = productRepository;
     }
 
@@ -36,5 +43,15 @@ public class ProductService {
     // ===================== DELETE =====================
     public void deleteProduct(long id) {
         this.productRepository.deleteById(id);
+    }
+
+    public CartRepository getCartRepository() {
+        return cartRepository;
+    }
+
+    public void handleAddProductToCart() {
+        // check-user đã có Cart chưa ? nếu chưa tạo mới
+
+        // lưu cart_detail
     }
 }

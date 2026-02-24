@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
@@ -24,4 +25,10 @@ public class ItemController {
         model.addAttribute("id", id);
         return "client/product/detail";
     }
+
+    @PostMapping("/add-product-to-cart/{id}")
+    public String addProductToCart(@PathVariable long id) {
+        return "redirect:/";
+    }
+
 }
