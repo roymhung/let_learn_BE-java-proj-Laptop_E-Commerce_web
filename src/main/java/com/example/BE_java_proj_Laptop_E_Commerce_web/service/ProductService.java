@@ -13,6 +13,8 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartDeltailRepo
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.ProductRepository;
 
+import jakarta.servlet.http.HttpSession;
+
 @Service
 public class ProductService {
 
@@ -55,7 +57,7 @@ public class ProductService {
         return cartRepository;
     }
 
-    public void handleAddProductToCart(String email, long productId) {
+    public void handleAddProductToCart(String email, long productId, HttpSession session) {
         User user = this.userService.getUserByEmail(email);
         if (user != null) {
             // check user đã có Cart chưa ? nếu chưa -> tạo mới
@@ -64,7 +66,7 @@ public class ProductService {
                 // tạo mới cart
                 Cart otherCart = new Cart();
                 otherCart.setUser(user);
-                otherCart.setSum(1);
+                otherCart.setSum(0);
 
                 this.cartRepository.save(otherCart);
             }
@@ -75,15 +77,32 @@ public class ProductService {
             if (producOptional.isPresent()) {
                 Product realProduct = producOptional.get();
 
-                CartDetail cd = new CartDetail();
-                cd.setCart(cart);
-                cd.setProduct(realProduct);
-                cd.setPrice(realProduct.getPrice());
-                cd.setQuantity(1);
+                // check sản phẩm đã từng được thêm vào giỏ hàng trước đây chưa ? www ~
+                // boolean isExistProductInCart =
+                // this.cartDeltailRepository.existsByCartAndProduct(cart, realProduct);
 
-                this.cartDeltailRepository.save(cd);
+                CartDetail oldDetail =
+                        this.cartDeltailRepository.findByCartAndProduct(cart, realProduct);
+                if (oldDetail == null) {
+                    CartDetail cd = new CartDetail();
+                    cd.setCart(cart);
+                    cd.setProduct(realProduct);
+                    cd.setPrice(realProduct.getPrice());
+                    cd.setQuantity(1);
+
+                    this.cartDeltailRepository.save(cd);
+
+                    // update cart (sum);
+                    int s = cart.getSum() + 1;
+                    cart.setSum(s);
+                    this.cartRepository.save(cart);
+                    session.setAttribute("sum", s);
+                } else {
+                    oldDetail.setQuantity(oldDetail.getQuantity() + 1);
+                    this.cartDeltailRepository.save(oldDetail);
+                }
+
             }
-
         }
     }
 }
