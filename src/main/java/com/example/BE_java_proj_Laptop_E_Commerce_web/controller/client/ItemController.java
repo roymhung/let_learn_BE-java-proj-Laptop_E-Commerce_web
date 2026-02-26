@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -38,4 +39,8 @@ public class ItemController {
         return "redirect:/";
     }
 
+    @GetMapping("/cart")
+    public String getCartPage(Model model) {
+        return "client/cart/show";
+    }
 }
