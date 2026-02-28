@@ -134,5 +134,21 @@ public class ProductService {
 
     }
 
+    public void handleUpdateCartBeforeCheckout(List<CartDetail> cartDetails) {
+        for (CartDetail cartDetail : cartDetails) {
+            Optional<CartDetail> cdOptional =
+                    this.cartDetailRepository.findById(cartDetail.getId());
+            if (cdOptional.isPresent()) {
+                CartDetail currentCartDetail = cdOptional.get();
+                // Nếu số lượng <= 0 thì bỏ qua hoặc có thể xóa
+                if (cartDetail.getQuantity() <= 0) {
+                    continue;
+                }
+                currentCartDetail.setQuantity(cartDetail.getQuantity());
+                this.cartDetailRepository.save(currentCartDetail);
+            }
+        }
+    }
+
 
 }
