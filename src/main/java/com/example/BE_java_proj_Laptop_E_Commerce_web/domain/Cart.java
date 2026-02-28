@@ -10,7 +10,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Min;
 
 @Entity
 @Table(name = "carts")
@@ -20,7 +19,6 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Min(value = 0)
     private int sum;
 
     // user_id
@@ -30,7 +28,7 @@ public class Cart {
 
     // cart_detail_id
     @OneToMany(mappedBy = "cart")
-    List<CartDetail> cartDetails;
+    private List<CartDetail> cartDetails;
 
     public Long getId() {
         return id;

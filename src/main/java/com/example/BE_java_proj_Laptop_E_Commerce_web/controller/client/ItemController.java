@@ -74,14 +74,14 @@ public class ItemController {
         model.addAttribute("cartDetails", cartDetails);
         model.addAttribute("totalPrice", totalPrice);
 
+        model.addAttribute("cart", cart);
         return "client/cart/show";
     }
 
     @PostMapping("/delete-cart-product/{id}")
     public String deleteCartDetail(@PathVariable long id, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        long cartDetailId = id;
-        this.productService.handleRemoveCartDetail(cartDetailId, session);
+        this.productService.handleRemoveCartDetail(id, session);
         return "redirect:/cart";
     }
 }
