@@ -11,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.CustomUserDetailsService;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
 
@@ -34,7 +35,8 @@ public class SecurityConfiguration {
     public DaoAuthenticationProvider authProvider(PasswordEncoder passwordEncoder,
             UserDetailsService userDetailsService) {
 
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder);
         authProvider.setHideUserNotFoundExceptions(false);
         return authProvider;

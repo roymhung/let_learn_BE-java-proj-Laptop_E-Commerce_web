@@ -7,13 +7,18 @@ import org.springframework.stereotype.Service;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.CartDetail;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Order;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.OrderDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartDetailRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartRepository;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.OrderDetailRepository;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.OrderRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.ProductRepository;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Service
 public class ProductService {
@@ -22,13 +27,20 @@ public class ProductService {
     private final CartRepository cartRepository;
     private final CartDetailRepository cartDetailRepository;
     private final UserService userService;
+    private final OrderRepository orderRepository;
+    private final OrderDetailRepository orderDetailRepository;
 
-    public ProductService(CartDetailRepository cartDetailRepository, CartRepository cartRepository,
-            ProductRepository productRepository, UserService userService) {
-        this.cartDetailRepository = cartDetailRepository;
-        this.cartRepository = cartRepository;
+
+
+    public ProductService(ProductRepository productRepository, CartRepository cartRepository,
+            CartDetailRepository cartDetailRepository, UserService userService,
+            OrderRepository orderRepository, OrderDetailRepository orderDetailRepository) {
         this.productRepository = productRepository;
+        this.cartRepository = cartRepository;
+        this.cartDetailRepository = cartDetailRepository;
         this.userService = userService;
+        this.orderRepository = orderRepository;
+        this.orderDetailRepository = orderDetailRepository;
     }
 
     // ===================== CREATE & UPDATE =====================
@@ -150,5 +162,43 @@ public class ProductService {
         }
     }
 
+    @Transactional
+    public void handlePlaceOrder(User user, HttpSession session, String receiverName,
+            String receiverAddress, String receiverPhone) {
 
+        // create order
+        Order order = new Order();
+        order.setUser(user);
+        order.setReceiverName(receiverName);
+        order.setReceiverAddress(receiverAddress);
+        order.setReceiverPhone(receiverPhone);
+        order = this.orderRepository.save(order);
+
+        // create orderDetail
+
+        // step 1: get cart by user
+        Cart cart = this.cartRepository.findByUser(user);
+        if (cart != null) {
+            List<CartDetail> cartDetails = cart.getCartDetails();
+            if (cartDetails != null) {
+                for (CartDetail cd : cartDetails) {
+                    OrderDetail orderDetail = new OrderDetail();
+                    orderDetail.setOrder(order);
+                    orderDetail.setProduct(cd.getProduct());
+                    orderDetail.setPrice(cd.getPrice());
+                    orderDetail.setQuantity(cd.getQuantity());
+
+                    this.orderDetailRepository.save(orderDetail);
+                }
+                // step 2: delete cart_detail and cart
+                for (CartDetail cd : cartDetails) {
+                    this.cartDetailRepository.deleteById(cd.getId());
+                }
+                this.cartRepository.deleteById(cart.getId());
+
+                // step 3: update session
+                session.setAttribute("sum", 0);
+            }
+        }
+    }
 }
