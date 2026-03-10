@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Role;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.OrderRepository;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.ProductRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.RoleRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.UserRepository;
 
@@ -14,10 +16,15 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.UserRepository;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final OrderRepository orderRepository;
 
-    public UserService(UserRepository userRepository, RoleRepository roleRepository) {
-        this.userRepository = userRepository;
+    public UserService(OrderRepository orderRepository, ProductRepository productRepository,
+            RoleRepository roleRepository, UserRepository userRepository) {
+        this.orderRepository = orderRepository;
+        this.productRepository = productRepository;
         this.roleRepository = roleRepository;
+        this.userRepository = userRepository;
     }
 
     public List<User> getAllUsers() {
@@ -60,5 +67,17 @@ public class UserService {
 
     public User getUserByEmail(String email) {
         return this.userRepository.findByEmail(email);
+    }
+
+    public long countUsers() {
+        return this.userRepository.count();
+    }
+
+    public long countProducts() {
+        return this.productRepository.count();
+    }
+
+    public long countOrders() {
+        return this.orderRepository.count();
     }
 }
