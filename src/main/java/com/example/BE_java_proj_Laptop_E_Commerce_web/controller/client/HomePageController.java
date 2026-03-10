@@ -10,11 +10,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Order;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.RegisterDTO;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.service.OrderService;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.UserService;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -25,13 +28,15 @@ public class HomePageController {
     private final ProductService productService;
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;
+    private final OrderService orderService;
 
 
     public HomePageController(ProductService productService, UserService userService,
-            PasswordEncoder passwordEncoder) {
+            PasswordEncoder passwordEncoder, OrderService orderService) {
         this.productService = productService;
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
+        this.orderService = orderService;
     }
 
     @GetMapping("/")
@@ -83,4 +88,35 @@ public class HomePageController {
 
         return "client/auth/session-expired";
     }
+
+    // User login
+    // ↓
+    // Session lưu id
+    // ↓
+    // GET /order-history
+    // ↓
+    // Controller lấy userId
+    // ↓
+    // OrderService
+    // ↓
+    // OrderRepository
+    // ↓
+    // List<Order>
+    // ↓
+    // JSP hiển thị
+    @GetMapping("/order-history")
+    public String getOrderHistoryPage(Model model, HttpServletRequest request) {
+        User currentUser = new User();// null
+        HttpSession session = request.getSession(false);
+        long id = (long) session.getAttribute("id");
+        currentUser.setId(id);
+
+        List<Order> orders = this.orderService.fetchOrderByUser(currentUser);
+        model.addAttribute("orders", orders);
+        
+        return "client/cart/order-history";
+    }
+
+
+
 }

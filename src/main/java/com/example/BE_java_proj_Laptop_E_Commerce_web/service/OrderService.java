@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Order;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.OrderDetail;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.OrderDetailRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.OrderRepository;
 
@@ -68,4 +69,9 @@ public class OrderService {
             this.orderRepository.save(currentOrder);
         }
     }
+
+    public List<Order> fetchOrderByUser(User user) {
+        return this.orderRepository.findByUser(user);
+    }
+
 }

@@ -46,12 +46,9 @@
                     </div>
                     <!-- Spinner End -->
 
-
                     <!-- Navbar start -->
                     <jsp:include page="../layout/header.jsp" />
                     <!-- Navbar End -->
-
-
 
                     <!-- Single Product Start -->
                     <div class="container-fluid py-5 mt-5">
@@ -101,16 +98,53 @@
                                                     </button>
                                                 </div>
                                                 <input type="text"
-                                                    class="form-control form-control-sm text-center border-0" value="1">
+                                                    class="form-control form-control-sm text-center border-0" value="1"
+                                                    data-cart-detail-index="0">
                                                 <div class="input-group-btn">
                                                     <button class="btn btn-sm btn-plus rounded-circle bg-light border">
                                                         <i class="fa fa-plus"></i>
                                                     </button>
                                                 </div>
                                             </div>
-                                            <a href="#"
-                                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                                    class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart</a>
+
+                                            <form:form action="/add-product-from-view-detail" method="post"
+                                                modelAttribute="product">
+
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+
+                                                <input class="form-control d-none" type="text" value="${product.id}"
+                                                    name="id" />
+
+                                                <input class="form-control d-none" type="number" name="quantity"
+                                                    id="cartDetails0.quantity" value="1" />
+                                                <button
+                                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                    Add to cart
+                                                </button>
+                                            </form:form>
+                                            <!-- code test so sánh -->
+                                            <!-- <form:form action="/add-product-from-view-detail" method="post">
+
+                                                <input type="hidden" name="${_csrf.parameterName}"
+                                                    value="${_csrf.token}" />
+
+                                                <input type="hidden" name="id" value="${product.id}" />
+
+                                                <input type="number" name="quantity" value="1" min="1"
+                                                    class="form-control form-control-sm text-center border-0">
+
+                                                <button
+                                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary">
+                                                    <i class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                    Add to cart
+                                                </button>
+
+                                            </form:form> -->
+
+
+
                                         </div>
                                         <div class="col-lg-12">
                                             <nav>
