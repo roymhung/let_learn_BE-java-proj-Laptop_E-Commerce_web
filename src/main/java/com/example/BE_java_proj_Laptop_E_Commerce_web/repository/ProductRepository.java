@@ -1,5 +1,7 @@
 package com.example.BE_java_proj_Laptop_E_Commerce_web.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -7,5 +9,6 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Long> {
+    Page<Product> findAll(Pageable page);
 
 }
