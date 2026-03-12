@@ -283,6 +283,7 @@ h6,
   transform: rotate(45deg);
   background: var(--bs-secondary);
 }
+
 /*** featurs End ***/
 
 /*** service Start ***/
@@ -384,7 +385,7 @@ h6,
 
   border: 2px solid #f4a825;
   background: #fff;
-  color: #2f7d32;
+  color: #81c408;
 
   transition: all 0.25s ease;
 }
@@ -584,3 +585,328 @@ h6,
   line-height: 35px;
 }
 /*** Footer End ***/
+
+/*** Product List Page (Danh Sách Sản Phẩm) ***/
+.page-products {
+  font-family: "Inter", "Open Sans", sans-serif;
+}
+
+.page-products-breadcrumb {
+  font-size: 0.9rem;
+}
+
+.page-products-breadcrumb .breadcrumb-item a {
+  color: #6b7280;
+  text-decoration: none;
+}
+
+.page-products-breadcrumb .breadcrumb-item a:hover {
+  color: #81c408;
+}
+
+.page-products-breadcrumb .breadcrumb-item.active {
+  color: #111827;
+  font-weight: 500;
+}
+
+/* Filter sidebar */
+.product-filters-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e5e7eb;
+  overflow: hidden;
+  position: sticky;
+  top: 110px;
+}
+
+.product-filters-header {
+  background: linear-gradient(135deg, #81c408 0%, #6ba306 100%);
+  color: #fff;
+  padding: 14px 18px;
+  font-weight: 600;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  min-height: 48px;
+  gap: 10px;
+}
+
+.product-filters-header-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  font-size: 1rem;
+  flex-shrink: 0;
+  opacity: 1;
+  font-style: normal;
+}
+
+.product-filters-header-text {
+  letter-spacing: 0.02em;
+}
+
+.product-filters-body {
+  padding: 20px 18px;
+}
+
+.filter-group {
+  margin-bottom: 22px;
+}
+
+.filter-group:last-of-type {
+  margin-bottom: 20px;
+}
+
+.filter-group-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #374151;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filter-options-radio {
+  gap: 10px;
+}
+
+/* Custom checkbox */
+.filter-check {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #374151;
+  user-select: none;
+}
+
+.filter-check input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.filter-checkmark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition:
+    border-color 0.2s,
+    background 0.2s;
+}
+
+.filter-check input:checked + .filter-checkmark {
+  background: #81c408;
+  border-color: #81c408;
+}
+
+.filter-check .filter-checkmark {
+  position: relative;
+}
+
+.filter-check input:checked + .filter-checkmark::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 5px;
+  height: 9px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+.filter-label {
+  flex: 1;
+}
+
+/* Custom radio */
+.filter-radio {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #374151;
+  user-select: none;
+}
+
+.filter-radio input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.filter-radio-dot {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  margin-right: 10px;
+  flex-shrink: 0;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.filter-radio input:checked + .filter-radio-dot {
+  border-color: #81c408;
+  box-shadow:
+    inset 0 0 0 4px #fff,
+    0 0 0 2px #81c408;
+  background: #81c408;
+}
+
+.product-filters-btn {
+  width: 100%;
+  padding: 12px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(135deg, #81c408 0%, #6ba306 100%);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+
+.product-filters-btn:hover {
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(129, 196, 8, 0.4);
+}
+
+/* Product list cards - trang sản phẩm */
+.page-products .product-list-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  transition:
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.page-products .product-list-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: #d1d5db;
+}
+
+.page-products .product-list-card-body {
+  border-color: #e5e7eb !important;
+  background: #fff;
+}
+
+.page-products .product-list-card-title {
+  font-size: 15px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.page-products .product-list-card-title a {
+  color: #111827;
+  text-decoration: none;
+}
+
+.page-products .product-list-card-title a:hover {
+  color: #81c408;
+}
+
+.page-products .product-list-card-desc {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.45;
+  margin-bottom: 12px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-align: left;
+}
+
+.page-products .product-list-card-price {
+  font-size: 15px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.page-products .product-list-card-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid #81c408;
+  background: #fff;
+  color: #81c408;
+  transition: all 0.25s ease;
+}
+
+.page-products .product-list-card-btn:hover {
+  background: #81c408;
+  color: #fff;
+  border-color: #81c408;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(129, 196, 8, 0.35);
+}
+
+.page-products .pagination {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.page-products .pagination .page-item {
+  list-style: none;
+}
+
+.page-products .pagination .page-link {
+  padding: 8px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition:
+    background 0.2s,
+    color 0.2s;
+}
+
+.page-products .pagination .page-link.active {
+  background: #81c408;
+  color: #fff;
+  border-color: #81c408;
+}
+
+.page-products .pagination .page-link:hover:not(.disabled):not(.active) {
+  background: #f3f4f6;
+}
+
+@media (max-width: 991px) {
+  .product-filters-card {
+    position: static;
+    margin-bottom: 24px;
+  }
+}

@@ -2,7 +2,11 @@ package com.example.BE_java_proj_Laptop_E_Commerce_web.controller.client;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.CartDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
@@ -168,6 +173,43 @@ public class ItemController {
         return "redirect:/product/" + id;
     }
 
+    @GetMapping("/products")
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+        int page = 1;
+        try {
+            if (pageOptional.isPresent()) {
+                // convert from String to int
+                page = Integer.parseInt(pageOptional.get());
+            } else {
+                // page = 1
+            }
+        } catch (Exception e) {
+            // page = 1
+            // TODO: handle exception
+        }
+
+        // Guard invalid page indexes from query params (page is 1-based on UI)
+        if (page < 1) {
+            return "redirect:/products?page=1";
+        }
+
+        Pageable pageable = PageRequest.of(page - 1, 9);
+
+        Page<Product> prs = this.productService.fetchProducts(pageable);
+        List<Product> products = prs.getContent();
+
+        int totalPages = prs.getTotalPages();
+        // If user requests page beyond last page, redirect to last valid page (or 1 if empty)
+        if (totalPages > 0 && page > totalPages) {
+            return "redirect:/products?page=" + totalPages;
+        }
+
+        model.addAttribute("products", products);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", totalPages);
+
+        return "client/product/show";
+    }
 
 
 }
