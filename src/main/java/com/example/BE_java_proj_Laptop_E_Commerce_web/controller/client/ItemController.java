@@ -174,7 +174,8 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional) {
+    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional,
+            @RequestParam("name") Optional<String> nameOptional) {
         int page = 1;
         try {
             if (pageOptional.isPresent()) {
@@ -193,9 +194,11 @@ public class ItemController {
             return "redirect:/products?page=1";
         }
 
+        String name = nameOptional.get();
+
         Pageable pageable = PageRequest.of(page - 1, 9);
 
-        Page<Product> prs = this.productService.fetchProducts(pageable);
+        Page<Product> prs = this.productService.fetchProducts(pageable, name);
         List<Product> products = prs.getContent();
 
         int totalPages = prs.getTotalPages();

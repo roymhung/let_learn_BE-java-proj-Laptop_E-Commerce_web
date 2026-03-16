@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
@@ -12,6 +13,7 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.CartDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Order;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.OrderDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product_;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartDetailRepository;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.repository.CartRepository;
@@ -50,9 +52,15 @@ public class ProductService {
         return this.productRepository.save(pr);
     }
 
+    private Specification<Product> nameLike(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME),
+                "%" + name + "%");
+    }
+
+
     // ===================== READ ALL =====================
-    public Page<Product> fetchProducts(Pageable page) {
-        return this.productRepository.findAll(page);
+    public Page<Product> fetchProducts(Pageable page, String name) {
+        return this.productRepository.findAll(this.nameLike(name), page);
     }
 
     // ===================== READ BY ID =====================
