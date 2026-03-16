@@ -194,11 +194,11 @@ public class ItemController {
             return "redirect:/products?page=1";
         }
 
-        String name = nameOptional.get();
-
         Pageable pageable = PageRequest.of(page - 1, 9);
 
-        Page<Product> prs = this.productService.fetchProducts(pageable, name);
+        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+
+        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
         List<Product> products = prs.getContent();
 
         int totalPages = prs.getTotalPages();
