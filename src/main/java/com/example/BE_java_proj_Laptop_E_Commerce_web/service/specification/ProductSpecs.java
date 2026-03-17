@@ -8,10 +8,10 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product_;
 
 public class ProductSpecs {
-    // public static Specification<Product> nameLike(String name) {
-    // return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME),
-    // "%" + name + "%");
-    // }
+    public static Specification<Product> nameLike(String name) {
+        return (root, query, criteriaBuilder) -> criteriaBuilder.like(root.get(Product_.NAME),
+                "%" + name + "%");
+    }
 
     // case 1
     // public static Specification<Product> minPrice(double price) {

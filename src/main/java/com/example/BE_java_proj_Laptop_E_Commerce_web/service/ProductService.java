@@ -5,7 +5,6 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
@@ -57,9 +56,9 @@ public class ProductService {
         return this.productRepository.findAll(page);
     }
 
-    // public Page<Product> fetchProductsWithSpec(Pageable page, String name) {
-    // return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
-    // }
+    public Page<Product> fetchProductsWithSpec(Pageable page, String name) {
+        return this.productRepository.findAll(ProductSpecs.nameLike(name), page);
+    }
 
     // case 1
     // public Page<Product> fetchProductsWithSpec(Pageable page, double min) {
@@ -91,9 +90,9 @@ public class ProductService {
     // double max = 15000000;
 
     // return this.productRepository.findAll(ProductSpecs.matchPrice(min, max), page);
-    // } else if (price.equals("15-toi-20-trieu")) {
+    // } else if (price.equals("15-toi-30-trieu")) {
     // double min = 15000000;
-    // double max = 20000000;
+    // double max = 30000000;
 
     // return this.productRepository.findAll(ProductSpecs.matchPrice(min, max), page);
     // } else {
@@ -102,48 +101,48 @@ public class ProductService {
     // }
 
     // case 6
-    public Page<Product> fetchProductsWithSpec(Pageable page, List<String> price) {
+    // public Page<Product> fetchProductsWithSpec(Pageable page, List<String> price) {
 
-        Specification<Product> combinedSpec = Specification.where(null);
-        int count = 0;
+    // Specification<Product> combinedSpec = Specification.where(null);
+    // int count = 0;
 
-        for (String p : price) {
-            double min = 0;
-            double max = 0;
-            // Set the appropriate min and max based on the price range string
-            switch (p) {
+    // for (String p : price) {
+    // double min = 0;
+    // double max = 0;
+    // // Set the appropriate min and max based on the price range string
+    // switch (p) {
 
-                case "10-toi-15-trieu":
-                    min = 10000000;
-                    max = 15000000;
-                    count++;
-                    break;
+    // case "10-toi-15-trieu":
+    // min = 10000000;
+    // max = 15000000;
+    // count++;
+    // break;
 
-                case "15-toi-20-trieu":
-                    min = 15000000;
-                    max = 20000000;
-                    count++;
-                    break;
+    // case "15-toi-20-trieu":
+    // min = 15000000;
+    // max = 20000000;
+    // count++;
+    // break;
 
-                case "20-toi-30-trieu":
-                    min = 20000000;
-                    max = 30000000;
-                    count++;
-                    break;
-                // Add more cases as needed
-            }
-            if (min != 0 && max != 0) {
-                Specification<Product> rangeSpec = ProductSpecs.matchMultiplePrice(min, max);
-                combinedSpec = combinedSpec.or(rangeSpec);
-            }
-        }
+    // case "20-toi-30-trieu":
+    // min = 20000000;
+    // max = 30000000;
+    // count++;
+    // break;
+    // // Add more cases as needed
+    // }
+    // if (min != 0 && max != 0) {
+    // Specification<Product> rangeSpec = ProductSpecs.matchMultiplePrice(min, max);
+    // combinedSpec = combinedSpec.or(rangeSpec);
+    // }
+    // }
 
-        // Check if any price ranges were added
-        if (count == 0) {
-            return this.productRepository.findAll(page);
-        }
-        return this.productRepository.findAll(combinedSpec, page);
-    }
+    // // Check if any price ranges were added
+    // if (count == 0) {
+    // return this.productRepository.findAll(page);
+    // }
+    // return this.productRepository.findAll(combinedSpec, page);
+    // }
 
 
     // ===================== READ BY ID =====================

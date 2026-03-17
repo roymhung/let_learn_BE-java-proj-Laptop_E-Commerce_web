@@ -233,4 +233,74 @@
     formatted = formatted.replace(/\./g, ",");
     return formatted;
   }
+
+  // ================= FILTER PRODUCTS =================
+
+  // chỉ cho chọn 1 sort
+  $("input[name='sort']").on("change", function () {
+    $("input[name='sort']").not(this).prop("checked", false);
+  });
+
+  $("#btnFilter").click(function (e) {
+    e.preventDefault();
+
+    let factoryArr = [];
+    let targetArr = [];
+    let priceArr = [];
+
+    // ===== factory =====
+    $("#factoryFilter input[type='checkbox']:checked").each(function () {
+      factoryArr.push($(this).val());
+    });
+
+    // ===== target =====
+    $("#targetFilter input[type='checkbox']:checked").each(function () {
+      targetArr.push($(this).val());
+    });
+
+    // ===== price =====
+    $("#priceFilter input[type='checkbox']:checked").each(function () {
+      priceArr.push($(this).val());
+    });
+
+    // ===== sort =====
+    let sortValue = $("input[name='sort']:checked").first().val();
+
+    const currentUrl = new URL(window.location.href);
+    const searchParams = currentUrl.searchParams;
+
+    // reset page
+    searchParams.set("page", "1");
+
+    // ===== price =====
+    if (priceArr.length > 0) {
+      searchParams.set("price", priceArr.join(","));
+    } else {
+      searchParams.delete("price");
+    }
+
+    // ===== sort =====
+    if (sortValue) {
+      searchParams.set("sort", sortValue);
+    } else {
+      searchParams.delete("sort");
+    }
+
+    // ===== factory =====
+    if (factoryArr.length > 0) {
+      searchParams.set("factory", factoryArr.join(","));
+    } else {
+      searchParams.delete("factory");
+    }
+
+    // ===== target =====
+    if (targetArr.length > 0) {
+      searchParams.set("target", targetArr.join(","));
+    } else {
+      searchParams.delete("target");
+    }
+
+    // redirect
+    window.location.href = currentUrl.toString();
+  });
 })(jQuery);

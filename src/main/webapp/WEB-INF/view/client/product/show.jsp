@@ -59,7 +59,7 @@
 
                                         <form id="filterForm" class="product-filters-body" action="/products"
                                             method="get">
-                                            <div class="filter-group">
+                                            <div class="filter-group" id="factoryFilter">
                                                 <div class="filter-group-title">Hãng sản xuất</div>
                                                 <div class="filter-options">
                                                     <label class="filter-check">
@@ -95,7 +95,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="filter-group">
+                                            <div class="filter-group" id="targetFilter">
                                                 <div class="filter-group-title">Mục đích sử dụng</div>
                                                 <div class="filter-options">
                                                     <label class="filter-check">
@@ -126,28 +126,28 @@
                                                 </div>
                                             </div>
 
-                                            <div class="filter-group">
+                                            <div class="filter-group" id="priceFilter">
                                                 <div class="filter-group-title">Mức giá</div>
                                                 <div class="filter-options filter-options-radio">
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="price" value="duoi-10-trieu">
+                                                        <input type="checkbox" name="price" value="duoi-10-trieu">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Dưới 10 triệu</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="price" value="10-15-trieu">
+                                                        <input type="checkbox" name="price" value="10-15-trieu">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Từ 10 - 15 triệu</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="price" value="15-20-trieu">
+                                                        <input type="checkbox" name="price" value="15-20-trieu">
                                                         <span class="filter-radio-dot"></span>
-                                                        <span class="filter-label">Từ 15 - 20 triệu</span>
+                                                        <span class="filter-label">Từ 15 - 30 triệu</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="price" value="tren-20-trieu">
+                                                        <input type="checkbox" name="price" value="tren-20-trieu">
                                                         <span class="filter-radio-dot"></span>
-                                                        <span class="filter-label">Trên 20 triệu</span>
+                                                        <span class="filter-label">Trên 30 triệu</span>
                                                     </label>
                                                 </div>
                                             </div>
@@ -156,24 +156,24 @@
                                                 <div class="filter-group-title">Sắp xếp</div>
                                                 <div class="filter-options filter-options-radio">
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="sort" value="gia-tang-dan">
+                                                        <input type="checkbox" name="sort" value="gia-tang-dan">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Giá tăng dần</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="sort" value="gia-giam-dan">
+                                                        <input type="checkbox" name="sort" value="gia-giam-dan">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Giá giảm dần</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="radio" name="sort" value="gia-nothing" checked>
+                                                        <input type="checkbox" name="sort" value="gia-nothing" checked>
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Mặc định</span>
                                                     </label>
                                                 </div>
                                             </div>
 
-                                            <button type="submit" class="product-filters-btn">
+                                            <button type="submit" class="product-filters-btn" id="btnFilter">
                                                 <i class="fas fa-search me-2"></i>
                                                 Lọc sản phẩm
                                             </button>
