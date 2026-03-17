@@ -20,6 +20,7 @@ import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Cart;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.CartDetail;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.Product;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.User;
+import com.example.BE_java_proj_Laptop_E_Commerce_web.domain.dto.ProductCriteriaDTO;
 import com.example.BE_java_proj_Laptop_E_Commerce_web.service.ProductService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -175,17 +176,12 @@ public class ItemController {
     }
 
     @GetMapping("/products")
-    public String getProductPage(Model model, @RequestParam("page") Optional<String> pageOptional,
-            @RequestParam("name") Optional<String> nameOptional,
-            @RequestParam("factory") Optional<String> factoryOptional,
-            @RequestParam("target") Optional<String> targetOptional,
-            @RequestParam("price") Optional<String> priceOptional,
-            @RequestParam("sort") Optional<String> sortOptional) {
+    public String getProductPage(Model model, ProductCriteriaDTO productCriteriaDTO) {
         int page = 1;
         try {
-            if (pageOptional.isPresent()) {
+            if (productCriteriaDTO.getPage().isPresent()) {
                 // convert from String to int
-                page = Integer.parseInt(pageOptional.get());
+                page = Integer.parseInt(productCriteriaDTO.getPage().get());
             } else {
                 // page = 1
             }
@@ -194,16 +190,13 @@ public class ItemController {
             // TODO: handle exception
         }
 
-        // Guard invalid page indexes from query params (page is 1-based on UI)
-        if (page < 1) {
-            return "redirect:/products?page=1";
-        }
-
         Pageable pageable = PageRequest.of(page - 1, 9);
 
-        String name = nameOptional.isPresent() ? nameOptional.get() : "";
+        // String name = nameOptional.isPresent() ? nameOptional.get() : "";
 
-        Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
+        Page<Product> prs = this.productService.fetchProducts(pageable);
+
+        // Page<Product> prs = this.productService.fetchProductsWithSpec(pageable, name);
 
         // case 1
         // double min = minOptional.isPresent() ? Double.parseDouble(minOptional.get()) : 0;
