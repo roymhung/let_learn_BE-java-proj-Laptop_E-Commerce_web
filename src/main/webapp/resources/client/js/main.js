@@ -286,6 +286,11 @@
       searchParams.delete("sort");
     }
 
+    //reset
+    searchParams.delete("factory");
+    searchParams.delete("target");
+    searchParams.delete("price");
+
     // ===== factory =====
     if (factoryArr.length > 0) {
       searchParams.set("factory", factoryArr.join(","));

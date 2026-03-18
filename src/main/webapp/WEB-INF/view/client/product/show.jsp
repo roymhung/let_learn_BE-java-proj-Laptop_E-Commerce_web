@@ -140,12 +140,12 @@
                                                         <span class="filter-label">Từ 10 - 15 triệu</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="checkbox" name="price" value="15-20-trieu">
+                                                        <input type="checkbox" name="price" value="15-30-trieu">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Từ 15 - 30 triệu</span>
                                                     </label>
                                                     <label class="filter-radio">
-                                                        <input type="checkbox" name="price" value="tren-20-trieu">
+                                                        <input type="checkbox" name="price" value="tren-30-trieu">
                                                         <span class="filter-radio-dot"></span>
                                                         <span class="filter-label">Trên 30 triệu</span>
                                                     </label>
@@ -184,6 +184,10 @@
                                 <!-- Product Grid -->
                                 <main class="col-12 col-md-8 col-lg-9 text-center">
                                     <div class="row g-4 fruite">
+                                        <c:if test="${totalPages == 0}">
+                                            <div>Không tìm thấy sản phẩm</div>
+                                        </c:if>
+
                                         <c:forEach var="product" items="${products}">
                                             <div class="col-md-6 col-lg-4">
                                                 <div class="rounded position-relative fruite-item product-list-card">
