@@ -97,38 +97,48 @@
 
                                                     </c:forEach>
 
+                                                    <c:if test="${empty users1}">
+                                                        <tr>
+                                                            <td colspan="6" class="text-center text-danger">
+                                                                Không tìm thấy người dùng
+                                                            </td>
+                                                        </tr>
+                                                    </c:if>
                                                 </tbody>
                                             </table>
 
-                                            <!-- pagination Page -->
-                                            <nav aria-label="Page navigation example">
-                                                <ul class="pagination justify-content-center">
-                                                    <li class="page-item">
-                                                        <a class="${1 eq currentPage ? 'disabled page-link': 'page-link' }"
-                                                            href="/admin/user?page=${currentPage - 1}"
-                                                            aria-label="Previous">
-                                                            <span aria-hidden="true">&laquo;</span>
-                                                        </a>
-                                                    </li>
-
-                                                    <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                                            <c:if test="${ not empty users1}">
+                                                <!-- pagination Page -->
+                                                <nav aria-label="Page navigation example">
+                                                    <ul class="pagination justify-content-center">
                                                         <li class="page-item">
-                                                            <a class="${(loop.index + 1) eq currentPage ? 'active page-link': 'page-link' }"
-                                                                href="/admin/user?page=${loop.index + 1}">
-                                                                ${loop.index + 1}
+                                                            <a class="${1 eq currentPage ? 'disabled page-link': 'page-link' }"
+                                                                href="/admin/user?page=${currentPage - 1}"
+                                                                aria-label="Previous">
+                                                                <span aria-hidden="true">&laquo;</span>
                                                             </a>
                                                         </li>
-                                                    </c:forEach>
 
-                                                    <li class="page-item">
-                                                        <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link' }"
-                                                            href="/admin/user?page=${currentPage + 1}"
-                                                            aria-label="Next">
-                                                            <span aria-hidden="true">&raquo;</span>
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </nav>
+                                                        <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
+                                                            <li class="page-item">
+                                                                <a class="${(loop.index + 1) eq currentPage ? 'active page-link': 'page-link' }"
+                                                                    href="/admin/user?page=${loop.index + 1}">
+                                                                    ${loop.index + 1}
+                                                                </a>
+                                                            </li>
+                                                        </c:forEach>
+
+                                                        <li class="page-item">
+                                                            <a class="${totalPages eq currentPage ? 'disabled page-link': 'page-link' }"
+                                                                href="/admin/user?page=${currentPage + 1}"
+                                                                aria-label="Next">
+                                                                <span aria-hidden="true">&raquo;</span>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </nav>
+                                            </c:if>
+
                                         </div>
                                     </div>
                                 </div>

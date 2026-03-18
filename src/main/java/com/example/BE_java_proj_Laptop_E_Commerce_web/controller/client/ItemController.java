@@ -60,6 +60,11 @@ public class ItemController {
         // Lấy session hiện tại (không tạo mới)
         HttpSession session = request.getSession(false);
 
+        // Nếu chưa đăng nhập hoặc session không có id thì chuyển về login
+        if (session == null || session.getAttribute("id") == null) {
+            return "redirect:/login";
+        }
+
         // Lấy id user từ session
         long id = (long) session.getAttribute("id");
 
