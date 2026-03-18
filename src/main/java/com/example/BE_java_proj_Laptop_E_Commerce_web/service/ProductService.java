@@ -96,8 +96,18 @@ public class ProductService {
     // case 6
     public Specification<Product> buildPriceSpecification(List<String> price) {
 
-        Specification<Product> combinedSpec =
-                (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
+        // Specification<Product> combinedSpec =
+        // (root, query, criteriaBuilder) -> criteriaBuilder.disjunction();
+
+
+        // Khởi tạo Specification rỗng (không có điều kiện filter ban đầu)
+        // Tương đương với việc bắt đầu query mà chưa có WHERE clause
+        // Sau đó sẽ dùng .and() hoặc .or() để thêm các điều kiện động vào
+        Specification<Product> combinedSpec = Specification.where(null); // disconjunction
+
+        // Specification.where(null) ===>> Bắt đầu "rỗng", không filter
+
+        // criteriaBuilder.disjunction() ===>> luôn FALSE (lọc ra 0 record)
 
         for (String p : price) {
             double min = 0;

@@ -229,7 +229,7 @@
                                                 <ul class="pagination justify-content-center mt-5 mb-0">
                                                     <li class="page-item">
                                                         <a class="${1 eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="${1 eq currentPage ? '#' : '/products?page='}${1 eq currentPage ? '' : currentPage - 1}"
+                                                            href="${1 eq currentPage ? '#' : '/products?page='}${1 eq currentPage ? '' : currentPage - 1}${queryString}"
                                                             aria-label="Previous">
                                                             <span aria-hidden="true">&laquo;</span>
                                                         </a>
@@ -237,13 +237,14 @@
                                                     <c:forEach begin="0" end="${totalPages - 1}" varStatus="loop">
                                                         <li class="page-item">
                                                             <a class="${(loop.index + 1) eq currentPage ? 'active page-link' : 'page-link'}"
-                                                                href="/products?page=${loop.index + 1}">${loop.index +
+                                                                href="/products?page=${loop.index + 1}${queryString}">${loop.index
+                                                                +
                                                                 1}</a>
                                                         </li>
                                                     </c:forEach>
                                                     <li class="page-item">
                                                         <a class="${totalPages eq currentPage ? 'disabled page-link' : 'page-link'}"
-                                                            href="${totalPages eq currentPage ? '#' : '/products?page='}${totalPages eq currentPage ? '' : currentPage + 1}"
+                                                            href="${totalPages eq currentPage ? '#' : '/products?page='}${totalPages eq currentPage ? '' : currentPage + 1}${queryString}"
                                                             aria-label="Next">
                                                             <span aria-hidden="true">&raquo;</span>
                                                         </a>
