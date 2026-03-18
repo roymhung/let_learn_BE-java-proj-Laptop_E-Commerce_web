@@ -92,6 +92,11 @@ public class ItemController {
     public String deleteCartDetail(@PathVariable long id, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         this.productService.handleRemoveCartDetail(id, session);
+        if (session != null) {
+            session.setAttribute("toastHeading", "Giỏ hàng");
+            session.setAttribute("toastText", "Đã xóa sản phẩm khỏi giỏ hàng");
+            session.setAttribute("toastIcon", "warning");
+        }
         return "redirect:/cart";
     }
 

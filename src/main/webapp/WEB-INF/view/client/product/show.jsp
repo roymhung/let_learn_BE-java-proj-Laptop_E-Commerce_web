@@ -13,6 +13,10 @@
                     <meta content="" name="keywords">
                     <meta content="" name="description">
 
+                    <!-- CSRF (Spring Security) -->
+                    <meta name="_csrf" content="${_csrf.token}" />
+                    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
                     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
@@ -25,7 +29,19 @@
                     <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
                     <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
+
+                    <!-- Toast CSS -->
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                        rel="stylesheet">
+
                     <link href="/client/css/style.css" rel="stylesheet">
+                    <style>
+                        .page-link.disabled {
+                            color: var(--bs-pagination-disabled-color);
+                            pointer-events: none;
+                            background-color: var(--bs-pagination-disabled-bg);
+                        }
+                    </style>
                 </head>
 
                 <body class="page-products">
@@ -209,15 +225,11 @@
                                                                 <fmt:formatNumber type="number"
                                                                     value="${product.price}" />đ
                                                             </p>
-                                                            <form action="/add-product-to-cart/${product.id}"
-                                                                method="post">
-                                                                <input type="hidden" name="${_csrf.parameterName}"
-                                                                    value="${_csrf.token}" />
-                                                                <button type="submit"
-                                                                    class="mx-auto btn product-list-card-btn">
-                                                                    <i class="fa fa-shopping-cart me-2"></i>Thêm vào giỏ
-                                                                </button>
-                                                            </form>
+                                                            <button type="button"
+                                                                class="mx-auto btn product-list-card-btn btnAddToCartProductList"
+                                                                data-product-id="${product.id}">
+                                                                <i class="fa fa-shopping-cart me-2"></i>Thêm vào giỏ
+                                                            </button>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -269,6 +281,11 @@
                     <script src="/client/lib/waypoints/waypoints.min.js"></script>
                     <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
                     <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+                    <!-- Toast JS -->
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
                     <script src="/client/js/main.js"></script>
                 </body>
 

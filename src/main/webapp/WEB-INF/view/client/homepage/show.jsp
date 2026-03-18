@@ -6,37 +6,40 @@
                 <html lang="en">
 
                 <head>
-                    <meta charset="UTF-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                    <title>Trang chủ-laptopshop</title>
-
+                    <meta charset="utf-8">
+                    <title>Sản Phẩm - Laptopshop</title>
                     <meta content="width=device-width, initial-scale=1.0" name="viewport">
                     <meta content="" name="keywords">
                     <meta content="" name="description">
 
-                    <!-- Google Web Fonts -->
+                    <!-- CSRF (Spring Security) -->
+                    <meta name="_csrf" content="${_csrf.token}" />
+                    <meta name="_csrf_header" content="${_csrf.headerName}" />
+
+                    <!-- Google Font -->
                     <link rel="preconnect" href="https://fonts.googleapis.com">
                     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600;800&display=swap"
+                    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
                         rel="stylesheet">
 
-                    <!-- Icon Font Stylesheet -->
+                    <!-- Icon -->
                     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
                     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css"
                         rel="stylesheet">
 
-                    <!-- Libraries Stylesheet -->
+                    <!-- Library CSS -->
                     <link href="/client/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
                     <link href="/client/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
-
-                    <!-- Customized Bootstrap Stylesheet -->
+                    <!-- Bootstrap -->
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
 
-                    <!-- Template Stylesheet -->
+                    <!-- Toast CSS -->
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                        rel="stylesheet">
+
+                    <!-- Main CSS -->
                     <link href="/client/css/style.css" rel="stylesheet">
-                </head>
 
                 <body>
 
@@ -106,20 +109,20 @@
                                                                             <fmt:formatNumber type="number"
                                                                                 value="${product.price}" /> đ
                                                                         </p>
-                                                                        <form
+                                                                        <!-- <form
                                                                             action="/add-product-to-cart/${product.id}"
                                                                             method="post">
                                                                             <input type="hidden"
                                                                                 name="${_csrf.parameterName}"
-                                                                                value="${_csrf.token}" />
+                                                                                value="${_csrf.token}" /> -->
 
-                                                                            <button href="#"
-                                                                                class="mx-auto btn border border-secondary rounded-pill px-3 text-primary">
-                                                                                <i
-                                                                                    class="fa fa-shopping-bag me-2 text-primary"></i>
-                                                                                Add to cart
-                                                                            </button>
-                                                                        </form>
+                                                                        <button data-product-id="${product.id}"
+                                                                            class="btnAddToCartHomepage mx-auto btn border border-secondary rounded-pill px-3 text-primary">
+                                                                            <i
+                                                                                class="fa fa-shopping-bag me-2 text-primary"></i>
+                                                                            Add to cart
+                                                                        </button>
+                                                                        <!-- </form> -->
 
                                                                     </div>
 
@@ -157,6 +160,10 @@
                     <script src="/client/lib/waypoints/waypoints.min.js"></script>
                     <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
                     <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+                    <!-- Toast JS -->
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
 
                     <!-- Template Javascript -->
                     <script src="/client/js/main.js"></script>

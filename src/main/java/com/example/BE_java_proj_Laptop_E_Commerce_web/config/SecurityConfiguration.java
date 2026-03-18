@@ -55,7 +55,7 @@ public class SecurityConfiguration {
                 .dispatcherTypeMatchers(DispatcherType.FORWARD, DispatcherType.INCLUDE).permitAll()
 
                 .requestMatchers("/", "/login", "/product/**", "/client/**", "/css/**", "/js/**",
-                        "/images/**", "/session-expired")
+                        "/images/**", "/products/**", "/session-expired")
                 .permitAll()
 
                 .requestMatchers("/admin/**").hasRole("ADMIN")

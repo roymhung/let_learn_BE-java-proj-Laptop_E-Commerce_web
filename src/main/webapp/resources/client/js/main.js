@@ -308,4 +308,162 @@
     // redirect
     window.location.href = currentUrl.toString();
   });
+
+  // ===== ADD TO CART - HOMEPAGE =====
+  $(".btnAddToCartHomepage").click(function (event) {
+    event.preventDefault();
+
+    if (!isLogin()) {
+      $.toast({
+        heading: "Lỗi thao tác",
+        text: "Bạn cần đăng nhập tài khoản",
+        position: "top-right",
+        icon: "error",
+      });
+      return;
+    }
+
+    const productId = $(this).attr("data-product-id");
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+
+    $.ajax({
+      url: `${window.location.origin}/api/add-product-to-cart`,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        quantity: 1,
+        productId: productId,
+      }),
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(header, token);
+      },
+      success: function (response) {
+        const sum = +response;
+        $("#sumCart").text(sum);
+
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Thêm sản phẩm vào giỏ hàng thành công",
+          position: "top-right",
+          icon: "success",
+        });
+      },
+      error: function (response) {
+        alert("Có lỗi xảy ra, check code đi");
+        console.log("error:", response);
+      },
+    });
+  });
+
+  // ===== ADD TO CART - DETAIL =====
+  $(".btnAddToCartDetail").click(function (event) {
+    event.preventDefault();
+
+    if (!isLogin()) {
+      $.toast({
+        heading: "Lỗi thao tác",
+        text: "Bạn cần đăng nhập tài khoản",
+        position: "top-right",
+        icon: "error",
+      });
+      return;
+    }
+
+    const productId = $(this).attr("data-product-id");
+    const quantity = $("#cartDetails0\\.quantity").val();
+
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+
+    $.ajax({
+      url: `${window.location.origin}/api/add-product-to-cart`,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        quantity: quantity,
+        productId: productId,
+      }),
+      beforeSend: function (xhr) {
+        xhr.setRequestHeader(header, token);
+      },
+      success: function (response) {
+        const sum = +response;
+        $("#sumCart").text(sum);
+
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Thêm sản phẩm vào giỏ hàng thành công",
+          position: "top-right",
+          icon: "success",
+        });
+      },
+      error: function (response) {
+        alert("Có lỗi xảy ra");
+        console.log("error:", response);
+      },
+    });
+  });
+
+  // ===== ADD TO CART - PRODUCT LIST (/products) =====
+  $(".btnAddToCartProductList").click(function (event) {
+    event.preventDefault();
+
+    if (!isLogin()) {
+      $.toast({
+        heading: "Lỗi thao tác",
+        text: "Bạn cần đăng nhập tài khoản",
+        position: "top-right",
+        icon: "error",
+      });
+      return;
+    }
+
+    const productId = $(this).attr("data-product-id");
+    const token = $("meta[name='_csrf']").attr("content");
+    const header = $("meta[name='_csrf_header']").attr("content");
+
+    $.ajax({
+      url: `${window.location.origin}/api/add-product-to-cart`,
+      type: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        quantity: 1,
+        productId: productId,
+      }),
+      beforeSend: function (xhr) {
+        if (header && token) {
+          xhr.setRequestHeader(header, token);
+        }
+      },
+      success: function (response) {
+        const sum = +response;
+        $("#sumCart").text(sum);
+
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Thêm sản phẩm vào giỏ hàng thành công",
+          position: "top-right",
+          icon: "success",
+        });
+      },
+      error: function (response) {
+        console.log("error:", response);
+        $.toast({
+          heading: "Giỏ hàng",
+          text: "Có lỗi xảy ra, vui lòng thử lại",
+          position: "top-right",
+          icon: "error",
+        });
+      },
+    });
+  });
+
+  // ===== CHECK LOGIN =====
+  function isLogin() {
+    const navElement = $("#navbarCollapse");
+    const childLogin = navElement.find("a.a-login");
+
+    return childLogin.length === 0;
+  }
 })(jQuery);

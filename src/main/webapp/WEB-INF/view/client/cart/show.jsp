@@ -33,6 +33,10 @@
                     <!-- Customized Bootstrap Stylesheet -->
                     <link href="/client/css/bootstrap.min.css" rel="stylesheet">
 
+                    <!-- Toast CSS -->
+                    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+                        rel="stylesheet">
+
                     <!-- Template Stylesheet -->
                     <link href="/client/css/style.css" rel="stylesheet">
                 </head>
@@ -227,6 +231,26 @@
                     <script src="/client/lib/waypoints/waypoints.min.js"></script>
                     <script src="/client/lib/lightbox/js/lightbox.min.js"></script>
                     <script src="/client/lib/owlcarousel/owl.carousel.min.js"></script>
+
+                    <!-- Toast JS -->
+                    <script
+                        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"></script>
+
+                    <c:if test="${not empty sessionScope.toastText}">
+                        <script>
+                            $(function () {
+                                $.toast({
+                                    heading: "${sessionScope.toastHeading}",
+                                    text: "${sessionScope.toastText}",
+                                    position: "top-right",
+                                    icon: "${sessionScope.toastIcon}",
+                                });
+                            });
+                        </script>
+                        <c:remove var="toastHeading" scope="session" />
+                        <c:remove var="toastText" scope="session" />
+                        <c:remove var="toastIcon" scope="session" />
+                    </c:if>
 
                     <!-- Template Javascript -->
                     <script src="/client/js/main.js"></script>
